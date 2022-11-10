@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Services\DotCat_Launcher.Services.Interfaces\DotCat_Launcher.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Services\DotCat_Launcher.Services\DotCat_Launcher.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\Image\User\" />
+    <Folder Include="Resource\Font\" />
+  </ItemGroup>
 </Project>
