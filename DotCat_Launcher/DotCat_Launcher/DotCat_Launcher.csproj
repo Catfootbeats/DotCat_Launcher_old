@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotCat_Launcher.Core\DotCat_Launcher.Core.csproj" />
+    <ProjectReference Include="..\Modules\DotCat_Launcher.Modules.ModuleName\DotCat_Launcher.Modules.ModuleName.csproj" />
+    <ProjectReference Include="..\Services\DotCat_Launcher.Services.Interfaces\DotCat_Launcher.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Services\DotCat_Launcher.Services\DotCat_Launcher.Services.csproj" />
+  </ItemGroup>
+</Project>
