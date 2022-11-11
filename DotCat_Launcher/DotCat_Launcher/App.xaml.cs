@@ -1,6 +1,4 @@
-﻿using DotCat_Launcher.Modules.ModuleName;
-using DotCat_Launcher.Services;
-using DotCat_Launcher.Services.Interfaces;
+﻿using DotCat_Launcher.Common;
 using DotCat_Launcher.ViewModels;
 using DotCat_Launcher.Views;
 using Prism.Ioc;
@@ -18,6 +16,13 @@ namespace DotCat_Launcher
         {
             return Container.Resolve<MainWindow>();
         }
+        protected override void OnInitialized()
+        {
+            var service = App.Current.MainWindow.DataContext as IConfigureService;
+            if (service != null)
+                service.Configure();
+            base.OnInitialized();
+        }
         //注册ViewModel
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
@@ -25,11 +30,6 @@ namespace DotCat_Launcher
             containerRegistry.RegisterForNavigation<DownloadView, DownloadViewModel>();
             containerRegistry.RegisterForNavigation<ManageView, ManageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
-        }
-
-        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
-        {
-            moduleCatalog.AddModule<ModuleNameModule>();
         }
     }
 }
