@@ -12,6 +12,8 @@ namespace DotCat_Launcher.Views
         {
             InitializeComponent();
             btnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
+            //最大化
+            #region
             //btnMax.Click += (s, e) => 
             //{
             //    if (this.WindowState == WindowState.Maximized)
@@ -19,7 +21,6 @@ namespace DotCat_Launcher.Views
             //    else
             //        this.WindowState = WindowState.Maximized;
             //};
-            btnClose.Click += (s, e) => { this.Close(); };
             //ColorZone.MouseDoubleClick += (s, e) => 
             //{
             //    if (this.WindowState == WindowState.Maximized)
@@ -27,6 +28,9 @@ namespace DotCat_Launcher.Views
             //    else
             //        this.WindowState = WindowState.Maximized;
             //};
+            #endregion
+            btnClose.Click += (s, e) => { this.Close(); };
+            menuBar.SelectionChanged += (s, e) => { drawerHost.IsLeftDrawerOpen = false; };
             ColorZone.MouseMove += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)

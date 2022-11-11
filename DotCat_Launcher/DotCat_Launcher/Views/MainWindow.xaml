@@ -4,6 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:core="clr-namespace:DotCat_Launcher.Core;assembly=DotCat_Launcher.Core"
+        xmlns:etx="clr-namespace:DotCat_Launcher.Extensions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -20,20 +21,25 @@
     <materialDesign:DialogHost DialogTheme="Inherit"
                              Identifier="RootDialog"
                              SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+        <materialDesign:DrawerHost x:Name="drawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="250">
-                    <ToggleButton Margin="20"
+                <DockPanel MinWidth="220">
+                    <ToggleButton Margin="15"
                         HorizontalAlignment="Right"
                         DockPanel.Dock="Top"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <StackPanel Margin="0,20">
-                        <ListBox ItemContainerStyle="{StaticResource MyListBoxItemStyle}" ItemsSource="{Binding MenuBars}" Margin="1">
+                    <StackPanel Margin="0,80">
+                        <ListBox x:Name="menuBar" ItemContainerStyle="{StaticResource MyListBoxItemStyle}" ItemsSource="{Binding MenuBars}" Margin="1" SelectedItem="1">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding ElementName=menuBar,Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="{Binding Icon}" Margin="15" Height="60" Width="30"/>
+                                        <materialDesign:PackIcon Kind="{Binding Icon}" Margin="15" Height="45" Width="25"/>
                                         <TextBlock Text="{Binding Title}" FontSize="15" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -43,7 +49,7 @@
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
-                <materialDesign:ColorZone x:Name="ColorZone" Padding="16"
+                <materialDesign:ColorZone x:Name="ColorZone" Padding="6"
                                   materialDesign:ElevationAssist.Elevation="Dp4"
                                   DockPanel.Dock="Top"
                                   Mode="PrimaryMid">
@@ -51,7 +57,7 @@
                         <StackPanel Orientation="Horizontal">
                             <ToggleButton x:Name="MenuToggleButton"
                             AutomationProperties.Name="HamburgerToggleButton"
-                            IsChecked="False"
+                            IsChecked="False" Margin="6"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
                             <TextBlock Margin="16,0"
@@ -63,12 +69,15 @@
                         </StackPanel>
 
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                            <Button x:Name="btnMin" Content="–" FontSize="15" Margin="10" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                            <Button x:Name="btnMin" Content="–" FontSize="15" Margin="5" Style="{DynamicResource MinButton}">
+                            </Button>
                             <!--<Button x:Name="btnMax" Content="☐" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>-->
-                            <Button x:Name="btnClose" Content="✕" FontSize="15" Margin="10"  Style="{StaticResource CloseButton}"/>
+                            <Button x:Name="btnClose" Content="✕" FontSize="15" Margin="5"  Style="{StaticResource CloseButton}"/>
                         </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>
+
+                <ContentControl prism:RegionManager.RegionName="{x:Static etx:PrismManager.MainWindowRegionName}"/>
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
