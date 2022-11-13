@@ -38,13 +38,13 @@ namespace DotCat_Launcher.Views
                 Point newMousePosition = e.GetPosition(this);
                 if (mouseLastPosition.X != newMousePosition.X)
                 {
-                    mouseDeltaFactor = System.Math.Abs(mouseLastPosition.X - newMousePosition.X);
+                    mouseDeltaFactor = Math.Abs(mouseLastPosition.X - newMousePosition.X);
                     HorizontalTransform(mouseLastPosition.X < newMousePosition.X, mouseDeltaFactor);//水平变换
                 }
 
                 if (mouseLastPosition.Y != newMousePosition.Y)// change position in the horizontal direction
                 {
-                    mouseDeltaFactor = System.Math.Abs(mouseLastPosition.Y - newMousePosition.Y);
+                    mouseDeltaFactor = Math.Abs(mouseLastPosition.Y - newMousePosition.Y);
                     VerticalTransform(mouseLastPosition.Y > newMousePosition.Y, mouseDeltaFactor);//垂直变换
                 }
 
@@ -53,10 +53,10 @@ namespace DotCat_Launcher.Views
         }
         private void VerticalTransform(bool upDown, double angleDeltaFactor)
         {
-            Vector3D postion = new Vector3D(camera.Position.X, camera.Position.Y, camera.Position.Z);
+            Vector3D postion = new(camera.Position.X, camera.Position.Y, camera.Position.Z);
             Vector3D rotateAxis = Vector3D.CrossProduct(postion, camera.UpDirection);
-            RotateTransform3D rt3d = new RotateTransform3D();
-            AxisAngleRotation3D rotate = new AxisAngleRotation3D(rotateAxis, angleDeltaFactor * (upDown ? -1 : 1));
+            RotateTransform3D rt3d = new();
+            AxisAngleRotation3D rotate = new(rotateAxis, angleDeltaFactor * (upDown ? -1 : 1));
             rt3d.Rotation = rotate;
             Matrix3D matrix = rt3d.Value;
             Point3D newPostition = matrix.Transform(camera.Position);
@@ -70,10 +70,10 @@ namespace DotCat_Launcher.Views
         }
         private void HorizontalTransform(bool leftRight, double angleDeltaFactor)
         {
-            Vector3D postion = new Vector3D(camera.Position.X, camera.Position.Y, camera.Position.Z);
+            Vector3D postion = new(camera.Position.X, camera.Position.Y, camera.Position.Z);
             Vector3D rotateAxis = camera.UpDirection;
-            RotateTransform3D rt3d = new RotateTransform3D();
-            AxisAngleRotation3D rotate = new AxisAngleRotation3D(rotateAxis, angleDeltaFactor * (leftRight ? -1 : 1));
+            RotateTransform3D rt3d = new();
+            AxisAngleRotation3D rotate = new(rotateAxis, angleDeltaFactor * (leftRight ? -1 : 1));
             rt3d.Rotation = rotate;
             Matrix3D matrix = rt3d.Value;
             Point3D newPostition = matrix.Transform(camera.Position);

@@ -5,16 +5,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Resource\Image\**" />
-    <EmbeddedResource Remove="Resource\Image\**" />
-    <None Remove="Resource\Image\**" />
-    <Page Remove="Resource\Image\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CalcBinding" Version="2.5.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1466-prerelease" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resource\Font\" />

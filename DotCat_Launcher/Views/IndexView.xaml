@@ -8,10 +8,8 @@
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
              xmlns:local="clr-namespace:DotCat_Launcher.Views"
-             MouseMove="Viewport3D_MouseMove"
-             MouseLeftButtonDown="Viewport3D_MouseLeftButtonDown"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1500">
+             d:DesignHeight="1000" d:DesignWidth="1500" MouseMove="Viewport3D_MouseMove" MouseLeftButtonDown="Viewport3D_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Row"/>
@@ -34,7 +32,7 @@
                     </Grid.RowDefinitions>
                     <Viewport3D Grid.Row="0" Width="200" Height="370" MouseMove="Viewport3D_MouseMove" MouseLeftButtonDown="Viewport3D_MouseLeftButtonDown">
                         <Viewport3D.Camera>
-                            <PerspectiveCamera Position="8,8,8" LookDirection="-1 -1 -1" FieldOfView="30" UpDirection="-1 1 -1" x:Name="camera"></PerspectiveCamera>
+                            <PerspectiveCamera Position="0,0,16" LookDirection="0,0,-1" FieldOfView="30" UpDirection="0,1,0" x:Name="camera"></PerspectiveCamera>
                         </Viewport3D.Camera>
                         <Viewport3D.Children>
                             <ModelVisual3D x:Name="light">
