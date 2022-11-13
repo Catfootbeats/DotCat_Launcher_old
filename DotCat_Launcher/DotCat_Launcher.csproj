@@ -11,7 +11,9 @@
     <Page Remove="Resource\Image\**" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CalcBinding" Version="2.5.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1466-prerelease" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>

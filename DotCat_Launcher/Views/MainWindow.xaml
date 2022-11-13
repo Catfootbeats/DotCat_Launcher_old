@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        Title="{Binding Title}" Height="618" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="{Binding Title}" Height="742" Width="1200" WindowStartupLocation="CenterScreen" MinHeight="742" MinWidth="1200"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -28,8 +28,16 @@
                         DockPanel.Dock="Top"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <StackPanel Margin="0,80">
-                        <ListBox x:Name="menuBar" ItemContainerStyle="{StaticResource MyListBoxItemStyle}" ItemsSource="{Binding MenuBars}" Margin="1">
+                    <StackPanel VerticalAlignment="Top">
+                        <ListBox x:Name="menuBar"
+                   Margin="0,16,0,16"
+                   AutomationProperties.Name="DemoPagesListBox"
+                   ItemsSource="{Binding MenuBars}"
+                   SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+                            <ListBox.Resources>
+                                <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" />
+                            </ListBox.Resources>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding ElementName=menuBar,Path=SelectedItem}"/>
@@ -93,9 +101,8 @@
                         </StackPanel>
 
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                            <Button x:Name="btnMin" Content="–" FontSize="15" Margin="5" ToolTip="最小化" Style="{DynamicResource MinButton}">
-                            </Button>
-                            <!--<Button x:Name="btnMax" Content="☐" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>-->
+                            <Button x:Name="btnMin" Content="–" FontSize="15" Margin="5" ToolTip="最小化" Style="{StaticResource MinButton}"/>
+                            <Button x:Name="btnMax" Content="☐" FontSize="15" Margin="5" ToolTip="最大化" Style="{StaticResource MinButton}"/>
                             <Button x:Name="btnClose" Content="✕" FontSize="15" Margin="5" ToolTip="关闭" Style="{StaticResource CloseButton}"/>
                         </StackPanel>
                     </DockPanel>

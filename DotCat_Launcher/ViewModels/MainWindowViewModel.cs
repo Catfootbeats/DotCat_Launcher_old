@@ -7,6 +7,7 @@ using Prism.Regions;
 using System.Windows.Automation.Provider;
 using DotCat_Launcher.Extensions;
 using DotCat_Launcher.Common;
+using DotCat_Launcher.Views;
 
 namespace DotCat_Launcher.ViewModels
 {
