@@ -30,6 +30,9 @@ namespace DotCat_Launcher
             containerRegistry.RegisterForNavigation<DownloadView, DownloadViewModel>();
             containerRegistry.RegisterForNavigation<ManageView, ManageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<IndividualisedView, IndividualistedViewModel>();
+            containerRegistry.RegisterForNavigation<UISettingsView, UISettingsViewModel>();
+            containerRegistry.RegisterForNavigation<AboutView, AboutViewModel>();
         }
     }
 }
