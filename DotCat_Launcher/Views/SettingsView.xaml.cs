@@ -23,6 +23,7 @@ namespace DotCat_Launcher.Views
         public SettingsView()
         {
             InitializeComponent();
+            settingsMenuBars.SelectionChanged += (s, e) => { cogIcon.Visibility = Visibility.Hidden; };
         }
     }
 }

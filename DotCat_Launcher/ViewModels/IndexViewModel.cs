@@ -11,6 +11,6 @@ namespace DotCat_Launcher.ViewModels
 {
     public class IndexViewModel : BindableBase
     {
-
+        
     }
 }

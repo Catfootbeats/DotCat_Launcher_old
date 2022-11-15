@@ -7,12 +7,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:viewmodels="clr-namespace:DotCat_Launcher.ViewModels"
         Title="{Binding Title}" Height="742" Width="1200" WindowStartupLocation="CenterScreen" MinHeight="742" MinWidth="1200"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
@@ -66,7 +67,7 @@
                             AutomationProperties.Name="HamburgerToggleButton"
                             IsChecked="False" Margin="6"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                            <Button Margin="24,0,0,0"
+                            <!--<Button Margin="24,0,0,0"
                                 materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"
                                 Command="{Binding GoBackCommand}"
                       Content="{materialDesign:PackIcon Kind=ArrowLeft,
@@ -82,7 +83,7 @@
                                                         Size=24}"
                       Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
                       Style="{StaticResource MaterialDesignToolButton}"
-                      ToolTip="下一页" />
+                      ToolTip="下一页" />-->
 
                             <Button Margin="16,0,0,0"
                       materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"
@@ -101,13 +102,30 @@
                         </StackPanel>
 
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="颜色模式" IsChecked="{Binding IsDarkTheme}" Margin="0,0,20,0">
+                                <materialDesign:PackIcon Kind="WhiteBalanceSunny" RenderTransformOrigin=".5,.5">
+                                </materialDesign:PackIcon>
+                                <materialDesign:ToggleButtonAssist.OnContent>
+                                    <materialDesign:PackIcon Kind="WeatherNight"/>
+                                </materialDesign:ToggleButtonAssist.OnContent>
+                            </ToggleButton>
+                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="窗口置顶" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked">
+                                <materialDesign:PackIcon Kind="Pin" RenderTransformOrigin=".5,.5">
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <RotateTransform Angle="45" />
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                                <materialDesign:ToggleButtonAssist.OnContent>
+                                    <materialDesign:PackIcon Kind="Pin"/>
+                                </materialDesign:ToggleButtonAssist.OnContent>
+                            </ToggleButton>
                             <Button x:Name="btnMin" Content="–" FontSize="15" Margin="5" ToolTip="最小化" Style="{StaticResource MinButton}"/>
                             <Button x:Name="btnMax" Content="☐" FontSize="15" Margin="5" ToolTip="最大化" Style="{StaticResource MinButton}"/>
                             <Button x:Name="btnClose" Content="✕" FontSize="15" Margin="5" ToolTip="关闭" Style="{StaticResource CloseButton}"/>
                         </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>
-
+                
                 <ContentControl prism:RegionManager.RegionName="{x:Static etx:PrismManager.MainWindowRegionName}"/>
             </DockPanel>
         </materialDesign:DrawerHost>

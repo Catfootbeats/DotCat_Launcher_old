@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Text="设置" FontSize="26" Margin="20,10"/>
-        <Border BorderBrush="Black" BorderThickness="0,0,0,0.3"></Border>
+        <Border BorderBrush="Gray" BorderThickness="0,0,0,0.3"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
@@ -44,9 +44,12 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Column="1">
-                <ContentControl prism:RegionManager.RegionName="{x:Static etx:PrismManager.SettingsViewRegionName}"/>
-            </Grid>
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+                <Grid>
+                    <materialDesign:PackIcon Kind="Cog" Name="cogIcon" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+                    <ContentControl prism:RegionManager.RegionName="{x:Static etx:PrismManager.SettingsViewRegionName}"/>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

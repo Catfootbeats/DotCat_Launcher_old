@@ -19,7 +19,7 @@
             <ColumnDefinition x:Name="SecCol"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Border BorderBrush="LightGray" BorderThickness="1" Margin="3" CornerRadius="10" Background="LightGreen" >
+            <Border x:Name="card" BorderBrush="LightGray" BorderThickness="1" Margin="3" CornerRadius="10" Background="LightGreen" >
                 <Border.Effect>
                     <DropShadowEffect Color="LightGray" BlurRadius="4" ShadowDepth="0" Opacity="1" />
                 </Border.Effect>

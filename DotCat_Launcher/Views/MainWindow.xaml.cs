@@ -1,4 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿using DotCat_Launcher.Event;
+using Prism.Events;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Input;
@@ -10,12 +15,11 @@ namespace DotCat_Launcher.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(IEventAggregator eventAggregator)
         {
             InitializeComponent();
             btnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
             //最大化
-            #region
             btnMax.Click += (s, e) =>
             {
                 if (this.WindowState == WindowState.Maximized)
@@ -30,7 +34,6 @@ namespace DotCat_Launcher.Views
                 else
                     this.WindowState = WindowState.Maximized;
             };
-            #endregion
             btnClose.Click += (s, e) => { this.Close(); };
             menuBar.SelectionChanged += (s, e) => { drawerHost.IsLeftDrawerOpen = false; };
             ColorZone.MouseMove += (s, e) =>
@@ -38,6 +41,16 @@ namespace DotCat_Launcher.Views
                 if (e.LeftButton == MouseButtonState.Pressed)
                     this.DragMove();
             };
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = false;
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = true;
         }
     }
 }

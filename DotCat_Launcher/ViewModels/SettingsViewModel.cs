@@ -22,7 +22,6 @@ namespace DotCat_Launcher.ViewModels
             this.regionManager = regionManager;
             NavigateCommand = new DelegateCommand<MenuBar>(Navigate);
             CreateMenuBars();
-            //regionManager.Regions[PrismManager.SettingsViewRegionName].RequestNavigate("IndividualisedView");
         }
         public DelegateCommand<MenuBar> NavigateCommand { get; private set; }
         private IRegionManager regionManager;
@@ -44,5 +43,6 @@ namespace DotCat_Launcher.ViewModels
             MenuBars.Add(new MenuBar { Icon = "HammerWrench", Title = "UI选项", NameSpace = "UISettingsView" });
             MenuBars.Add(new MenuBar { Icon = "Information", Title = "关于", NameSpace = "AboutView" });
         }
+
     }
 }

@@ -3,10 +3,99 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DotCat_Launcher.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+             xmlns:local="clr-namespace:DotCat_Launcher.Views" 
+             xmlns:converters="clr-namespace:DotCat_Launcher.Common.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <DataTemplate x:Key="SwatchColorTemplate" DataType="{x:Type Color}">
+            <Button
+                Width="40"
+                Height="40"
+                Margin="1"
+                Background="{Binding Converter={StaticResource ColorToBrushConverter}}"
+                BorderThickness="0"
+                Command="{Binding DataContext.ChangeHueCommand, RelativeSource={RelativeSource AncestorType=local:IndividualisedView}}"
+                CommandParameter="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="CardColorTemplate" DataType="{x:Type Color}">
+            <Button
+                Width="40"
+                Height="40"
+                Margin="1"
+                Background="{Binding Converter={StaticResource ColorToBrushConverter}}"
+                BorderThickness="0"
+                Command="{Binding DataContext.ChangeCardCommand, RelativeSource={RelativeSource AncestorType=local:IndividualisedView}}"
+                CommandParameter="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="个性化"/>
+        <StackPanel Orientation="Vertical" Margin="20">
+            <TabControl Width="900" HorizontalAlignment="Left" Margin="5">
+                <TabItem Header="主题颜色">
+                    <ItemsControl Margin="15" ItemsSource="{Binding Swatches}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type materialDesignColors:ISwatch}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ItemsControl ItemTemplate="{StaticResource SwatchColorTemplate}" ItemsSource="{Binding Hues}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </TabItem>
+                <TabItem Header="卡片颜色">
+                    <ItemsControl Margin="15" ItemsSource="{Binding Swatches}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type materialDesignColors:ISwatch}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ItemsControl ItemTemplate="{StaticResource CardColorTemplate}" ItemsSource="{Binding Hues}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </TabItem>
+                <TabItem Header="前面的区域，以后再来探索吧！">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="IsEnabledCheckBox" Content="使用图片" IsChecked="False" Margin="5"/>
+                        <Grid>
+                            <Grid.Resources>
+                                
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="370"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image/>
+                            <Button Grid.Row="1" Content="选择图片" FontSize="15" Width="100" HorizontalAlignment="Left" Margin="5" IsEnabled="{Binding ElementName=IsEnabledCheckBox, Path=IsChecked}"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="模糊" FontSize="15" IsEnabled="{Binding ElementName=IsEnabledCheckBox, Path=IsChecked}"/>
+                                <Slider Margin="85,0,0,0" Width="500" IsEnabled="{Binding ElementName=IsEnabledCheckBox, Path=IsChecked}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="不透明度" FontSize="15" IsEnabled="{Binding ElementName=IsEnabledCheckBox, Path=IsChecked}"/>
+                                <Slider Margin="55,0,0,0" Width="500" IsEnabled="{Binding ElementName=IsEnabledCheckBox, Path=IsChecked}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using Microsoft.Web.WebView2.Core;
+﻿using DotCat_Launcher.Event;
+using Microsoft.Web.WebView2.Core;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +27,10 @@ namespace DotCat_Launcher.Views
         private Point mouseLastPosition;
         private double mouseDeltaFactor;
 
-        public IndexView()
+        public IndexView(IEventAggregator eventAggregator)
         {
             InitializeComponent();
-                
+            eventAggregator.GetEvent<ColorEvent>().Subscribe((color) => { card.Background = new SolidColorBrush(color); }); ;
         }
 
         private void Viewport3D_MouseMove(object sender, MouseEventArgs e)
@@ -42,11 +44,11 @@ namespace DotCat_Launcher.Views
                     HorizontalTransform(mouseLastPosition.X < newMousePosition.X, mouseDeltaFactor);//水平变换
                 }
 
-                if (mouseLastPosition.Y != newMousePosition.Y)// change position in the horizontal direction
-                {
-                    mouseDeltaFactor = Math.Abs(mouseLastPosition.Y - newMousePosition.Y);
-                    VerticalTransform(mouseLastPosition.Y > newMousePosition.Y, mouseDeltaFactor);//垂直变换
-                }
+                //if (mouseLastPosition.Y != newMousePosition.Y)// change position in the horizontal direction
+                //{
+                //    mouseDeltaFactor = Math.Abs(mouseLastPosition.Y - newMousePosition.Y);
+                //    VerticalTransform(mouseLastPosition.Y > newMousePosition.Y, mouseDeltaFactor);//垂直变换
+                //}
 
                 mouseLastPosition = newMousePosition;
             }
